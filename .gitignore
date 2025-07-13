@@ -4,9 +4,6 @@
 /uploads
 /node_modules
 yarn-error.log
-terraform
-demo
-
 .idea
 
 coverage

@@ -1,0 +1,44 @@
+[
+  {
+    "name": "medusa",
+    "image": "akis4/medusa-backend",
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort": 9000,
+        "hostPort": 9000,
+        "protocol": "tcp"
+      }
+    ],
+    "environment": [
+      {
+        "name": "DATABASE_URL",
+        "value": "postgres://medusa:test1234@${db_host}:5432/medusadb?sslmode=require&rejectUnauthorized=false"
+      },
+      {
+        "name": "RDS_INS",
+        "value": "${db_host}"
+      },
+      {
+        "name": "NODE_TLS_REJECT_UNAUTHORIZED",
+        "value": "0"
+      },
+      {
+        "name": "STORE_CORS",
+        "value": "*"
+      },
+      {
+        "name": "ADMIN_CORS",
+        "value": "*"
+      },
+      {
+        "name": "JWT_SECRET",
+        "value": "supersecret"
+      },
+      {
+        "name": "COOKIE_SECRET",
+        "value": "supersecret"
+      }
+    ]
+  }
+]

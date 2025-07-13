@@ -3,7 +3,7 @@ name: Deploy Medusa Backend to AWS ECS
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -46,14 +46,17 @@ jobs:
       # 7. Update ECS Task Definition
       - name: Update ECS task definition
         id: update-task-def
+        env:
+          IMAGE: ${{ secrets.DOCKER_USERNAME }}/medusa-backend:latest
         run: |
           TASK_DEF=$(aws ecs describe-task-definition \
             --task-definition medusa-task \
             --region ap-south-1)
 
           NEW_TASK_DEF=$(echo "$TASK_DEF" | jq \
+            --arg IMAGE "$IMAGE" \
             '.taskDefinition |
-            .containerDefinitions[0].image = "${{ secrets.DOCKER_USERNAME }}/medusa-backend:latest" |
+            .containerDefinitions[0].image = $IMAGE |
             del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)')
 
           NEW_TASK_DEF_ARN=$(aws ecs register-task-definition \

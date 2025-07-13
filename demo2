@@ -1,0 +1,2 @@
+Design the IaC using Terraform  to deploy the  Medusa open source headless commerce platform backend : https://docs.medusajs.com/learn/deployment/general  , on AWS ECS with Fargate and set up CD pipeline using GitHub Actions . 
+Attach both the GitHub git repo (public) and video link of  explaining your code and output( it must shows your face). 
